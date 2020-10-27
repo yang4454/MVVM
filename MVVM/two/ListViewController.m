@@ -9,7 +9,8 @@
 #import "ListViewController.h"
 
 @interface ListViewController ()
-
+/** <#weak属性注释#> */
+@property (nonatomic, strong) ListView *myListView;
 @end
 
 @implementation ListViewController
@@ -24,35 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    self.tableView.dataSource = self;
-    self.tableView.delegate=self;
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.myListView];
     
     
-    RACSignal *requestSiganl = [self.requestViewModel.requeseCommand execute:nil];
-    [requestSiganl subscribeNext:^(id  _Nullable x) {
-        self.models = x;
-        [self.tableView reloadData];
-    }];
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.models.count;
-}
+    RACSignal *requestSiganl= [self.requestViewModel.requeseCommand execute:nil];
+    _myListView.requestSiganl= requestSiganl;
 
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BookTableViewCell *cell = [BookTableViewCell cellWithTableView:tableView];
-    cell.book=self.models[indexPath.row];
-    return cell;
+    
+//    self.myListView.requeseCommand = self.requestViewModel.requeseCommand;
+    
+    
+    [_myListView bindRac];
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    BookModel *book= self.models[indexPath.row];
-    UIViewController *vc = [[UIViewController alloc]init];
-    vc.title=book.title;
-    vc.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController pushViewController:vc animated:YES];
-}
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
+#pragma mark - 懒加载
+- (UIView *)myListView {
+    if (!_myListView) {
+        _myListView = [[ListView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        
+    }
+    return _myListView;
 }
 @end

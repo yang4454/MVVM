@@ -9,14 +9,12 @@
 //#import <UIKit/UIKit.h>
 #import "ListViewModel.h"
 #import "BookModel.h"
-#import "BookTableViewCell.h"
+#import "ListView.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface ListViewController : UIViewController
 @property(nonatomic,strong)ListViewModel *requestViewModel;
 
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *models;
 
 @end
 
