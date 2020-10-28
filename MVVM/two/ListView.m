@@ -28,21 +28,7 @@
     }
     return self;
 }
--(void)bindRac
-{
-//    RACSignal *requestSiganl= [self.requeseCommand execute:nil];
-//    [requestSiganl subscribeNext:^(id  _Nullable x) {
-//        self.models = x;
-//        [self.tableView reloadData];
-//        NSLog(@"----------");
-//    }];
-    
-    [self.requestSiganl subscribeNext:^(id  _Nullable x) {
-        self.models = x;
-        [self.tableView reloadData];
-        NSLog(@"----------");
-    }];
-}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.models.count;
 }

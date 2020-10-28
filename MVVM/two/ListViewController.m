@@ -29,13 +29,12 @@
     
     
     RACSignal *requestSiganl= [self.requestViewModel.requeseCommand execute:nil];
-    _myListView.requestSiganl= requestSiganl;
+    [requestSiganl subscribeNext:^(id  _Nullable x) {
+        self.myListView.models = x;
+        [self.myListView.tableView reloadData];
+        NSLog(@"----------");
+    }];
 
-    
-//    self.myListView.requeseCommand = self.requestViewModel.requeseCommand;
-    
-    
-    [_myListView bindRac];
 }
 #pragma mark - 懒加载
 - (UIView *)myListView {

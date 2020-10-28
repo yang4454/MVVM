@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 /** strong属性注释 */
 @property(nonatomic,strong)RACCommand *requeseCommand;
 @property(nonatomic,strong)RACSignal *requestSiganl;
--(void)bindRac;
 @end
 
 NS_ASSUME_NONNULL_END
