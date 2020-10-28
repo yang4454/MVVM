@@ -22,14 +22,17 @@
 #pragma mark - 懒加载
 - (UITextField *)nameTextField {
     if (!_nameTextField) {
-        _nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 100, 100, 50)];
+        _nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 100, 300, 50)];
+        _nameTextField.borderStyle = UITextBorderStyleRoundedRect;//设置边框样式（更多边框样式到补充说明中查看）默认的样式为UITextBorderStyleNone
     }
     return _nameTextField;
 }
 #pragma mark - 懒加载
 - (UITextField *)pwdTextField {
     if (!_pwdTextField) {
-        _pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 150, 100, 50)];
+        _pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 150, 300, 50)];//初始化
+        _pwdTextField.placeholder = @"请输入文字";//设置占位文本
+        _pwdTextField.borderStyle = UITextBorderStyleRoundedRect;//设置边框样式（更多边框样式到补充说明中查看）默认的样式为UITextBorderStyleNone
     }
     return _pwdTextField;
 }
@@ -42,5 +45,6 @@
     }
     return _loginBtn;
 }
+
 
 @end

@@ -44,7 +44,7 @@
         } else {
              self.loginView.loginBtn.backgroundColor = [UIColor redColor];
         }
-        NSLog(@"是否可以点击%@",x);
+        NSLog(@"是否可以点击%@",[x boolValue]? @"yes":@"no");
     }];
 //    2. 这种是再viewmodel 里面再创建一个RACSubject 信号 用来发送信号以便改变颜色
 //    self.viewModel.btnColorSubject = [RACSubject subject];
